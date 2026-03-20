@@ -1,0 +1,18 @@
+[project]
+name = "quality-rag"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "chromadb>=1.5.5",
+    "docling>=2.80.0",
+    "fastapi>=0.129.0",
+    "google>=3.0.0",
+    "google-genai>=1.63.0",
+    "langchain-community>=0.4.1",
+    "langchain-text-splitters>=1.1.1",
+    "llama-parse>=0.6.94",
+    "pypdf>=6.9.1",
+    "uvicorn>=0.41.0",
+]
