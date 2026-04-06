@@ -7,5 +7,5 @@ class PromptTemplate:
     system: str
     user: str
 
-    def render(self, query: str) -> str:
-        return Template(self.user).substitute(query=query)
+    def render(self, query: str, context: str) -> str:
+        return Template(self.user).substitute(query=query, context=context)

@@ -10,6 +10,11 @@ from src.features.retrieval.schemas.base_prompt import PromptTemplate
 
 
 DEFAULT_PROMPT = PromptTemplate(
-    system="""You are an expert quality consultant at a Big Four firm.Be concise, structured""",
-    user=""" QUERY : $query """,
+    system="""You are an expert quality consultant at a Big Four firm.Be concise, structured, answer the user query
+        based on the context provided
+    """,
+    user="""
+    CONTEXT : $context
+
+    QUERY : $query """,
 )
