@@ -1,5 +1,5 @@
 from langchain_core.documents import Document
-from .test_processor import TextProcessor
+from .text_processor import TextProcessor
 from pathlib import Path
 from langchain_community.document_loaders import PyMuPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -26,7 +26,7 @@ class Chunker:
     def __init__(self, text_processor: TextProcessor):
         self.text_processor: TextProcessor = text_processor
 
-    def run(self, file_path: Path):
+    def chunk(self, file_path: Path):
         """ENTRY POINT"""
 
         if not file_path.exists():
