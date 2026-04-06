@@ -35,7 +35,8 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # copy source
 COPY main.py .
 COPY src/ ./src/
-
+COPY alembic.ini .         
+COPY alembic/ ./alembic/  
 # create uploads directory
 RUN mkdir -p /app/uploads
 
