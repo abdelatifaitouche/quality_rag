@@ -7,46 +7,11 @@ import hashlib
 
 
 class Chunker:
-    """
-    Ingestion Pipeline is an orchestrator for the whole process of loading the pdfs from a file,
-
-    pass it to a text cleaning process,
-
-    then split the documents into chunks using for now the RecursiveCharacterSplitter (needs to search for semantic and hybrid types)
-
-    generate ids for each chunks using the md5 to avoid duplicates and sequentials ids
-
-    returns the chunks to get feed into the vector database
-
-
-    For now this is basic, needs to seperate chunking into its own class to handle it better
-    and to keep this pipeline modular
-    """
-
-    def __init__(self, text_processor: TextProcessor):
-        self.text_processor: TextProcessor = text_processor
-
-    def chunk(self, file_path: Path):
-        """ENTRY POINT"""
-
-        if not file_path.exists():
-            raise FileNotFoundError(f"File Not Found at {file_path}")
-
-        loader = PyMuPDFLoader(file_path=str(file_path))
-
-        docs = loader.load()
-
-        cleaned_docs_text = self.text_processor.process(docs)
-
-        chunks = self.chunking(cleaned_docs_text)
-
-        return chunks
-
     def generate_chunk_id(self, text, source, page) -> str:
         raw = f"{source}_{page}_{text[100:]}"
         return hashlib.md5(raw.encode()).hexdigest()
 
-    def chunking(self, docs: list[Document]):
+    def chunk(self, docs: list[Document]):
         text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=800,
             chunk_overlap=150,

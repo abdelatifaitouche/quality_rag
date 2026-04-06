@@ -25,7 +25,7 @@ services:
     build: .
     container_name: rag_worker
     restart: unless-stopped
-    command: celery -A src.workers.celery_app worker --loglevel=info
+    command: celery -A src.workers.celery_app:celery_app worker --loglevel=info
     env_file:
       - .env
     depends_on:
@@ -64,7 +64,7 @@ services:
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
 
   chromadb:
-    image: chromadb/chroma:0.5.0
+    image: chromadb/chroma:1.5.5
     container_name: rag_chromadb
     restart: unless-stopped
     ports:

@@ -2,9 +2,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import UploadFile
 from src.features.documents.repository import DocumentRepository
 from src.features.documents.models import Document
-from src.features.documents.schemas import DocumentCreate, DocumentStatus
+from src.features.documents.schemas import DocumentCreate, DocumentDetails
 from src.features.documents.enums import DocumentStatus
 
+
+from src.workers.ingestion import ingest_pdf
 
 import aiofiles
 import os
@@ -39,6 +41,8 @@ class IngestionUC:
             self.db,
         )
 
-        self.db.commit()
+        await self.db.commit()
 
-        return
+        task = ingest_pdf.delay(document.id, file_path)
+
+        return {"document_id": document.id, "status": document.status}

@@ -4,6 +4,7 @@ import os
 celery_app = Celery(
     "rag_worker",
     broker=os.getenv("CELERY_BROKER_URL"),
+    include=["src.workers.ingestion"],
 )
 
 
