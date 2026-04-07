@@ -18,3 +18,5 @@ class DocumentDetails(BaseModel):
     status: DocumentStatus
     file_size: int
     mime_type: str
+
+    model_config = {"from_attributes": True}
