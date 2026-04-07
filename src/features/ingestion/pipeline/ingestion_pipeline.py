@@ -4,6 +4,7 @@ from .chunker import Chunker
 from .text_processor import TextProcessor
 
 from langchain_core.documents import Document
+from src.core.embeddings.base import EmbeddingProvider
 
 
 class IngestionPipeline:
@@ -11,6 +12,7 @@ class IngestionPipeline:
         self.loader: DocumentLoader = loader
         self.processor: TextProcessor = processor
         self.chunker: Chunker = chunker
+
         self.vector_store = vector_store
 
     def run(self, file_path: Path, collection: str):

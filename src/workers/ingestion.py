@@ -1,4 +1,5 @@
 from src.workers.celery_app import celery_app
+from src.core.embeddings.gemini_embeddings import GeminiEmbeddingProvider
 
 
 @celery_app.task(bind=True, name="ingest_pdf")
@@ -30,12 +31,7 @@ def ingest_pdf(self, document_id: str, file_path: str):
             processor = TextProcessor()
             chunker = Chunker()
             vector_store = get_chroma_client()
-            pipeline = IngestionPipeline(
-                loader,
-                chunker,
-                processor,
-                vector_store,
-            )
+            pipeline = IngestionPipeline(loader, chunker, processor, vector_store)
 
             pipeline.run(Path(file_path), "quality_test")
 
