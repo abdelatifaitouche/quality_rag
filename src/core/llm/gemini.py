@@ -5,6 +5,10 @@ import os
 load_dotenv()
 
 _gemini_client = None
+"""
+    NOT THREAD SAFE,
+    either add  a lock,  or init at app startup only
+"""
 
 
 def get_gemini_client():

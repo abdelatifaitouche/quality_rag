@@ -23,6 +23,10 @@ class IngestionUC:
     async def ingest(self, file: UploadFile):
         """
         WRITE THE FILE TO DISK IN ASYNC NON BLOCKING IO
+
+        once issue to note here :
+            - two files with same name may overwrite eachother
+
         """
 
         upload_dir = os.getenv("UPLOAD_DIR", "/app/uploads")
